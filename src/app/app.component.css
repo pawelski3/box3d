@@ -1,0 +1,19 @@
+#test{
+    background-image: url("../assets/barren_bk.jpg");
+}
+
+.follow-text{
+    position:absolute;
+    z-index: 100;
+    border: 2px solid red;
+    background: yellowgreen;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: center;
+}
+
+.tooltip{
+    background-color: brown;
+    position:relative;
+}
