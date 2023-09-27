@@ -15,6 +15,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 export class AppComponent implements OnInit {
   title = 'box3d';
 
+camerax:any
+cameraz:any
+
+
   ngOnInit(): void {
     // var scene = new THREE.Scene();
     // var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -41,14 +45,15 @@ export class AppComponent implements OnInit {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 45, 30000);
-    camera.position.set(-900, -200, -900)
+    camera.position.set(-900, 0, -900)
     // let controls=new THREE.OrbitControls(camera);
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     let controls = new OrbitControls(camera, renderer.domElement)
-    controls.minDistance = 500
-    controls.maxDistance = 1500
+    // controls.enableDamping=true
+    // controls.minDistance = 500
+    // controls.maxDistance = 1500
     document.body.appendChild(renderer.domElement);
 
     const geometry = new THREE.BoxGeometry(10000, 10000, 10000);
@@ -82,32 +87,77 @@ export class AppComponent implements OnInit {
     // const cube = new THREE.Mesh( geometry, material );
     const cube = new THREE.Mesh(geometry, materialArray);
     scene.add(cube);
-    const cube2 = new THREE.Mesh(geometry1, material);
-    cube2.position.x = 3000;
-    scene.add(cube2)
-    camera.position.z = 5;
+    // const cube2 = new THREE.Mesh(geometry1, material);
+    // cube2.position.x = -500//3000;
+    // cube2.position.z = 0//3000;
+    // console.log("cube2 xz ",cube2.position.x,cube2.position.z)
+    // scene.add(cube2)
+    // camera.position.z = 0//5;
+    // camera.position.y = 100
 
 
-const p=document.createElement('p')
-p.className="tooltip"
-p.textContent="dsfdsfdsfs"
-const pContainer=document.createElement("div")
-pContainer.appendChild(p)
+    // const material3 = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+    // const cube3 = new THREE.Mesh(geometry1, material3);
+    // cube3.position.x = -500//3000;
+    // cube3.position.z = -150//3000;
+    // scene.add(cube3)
+    let texture1= new THREE.TextureLoader().load("../assets/barren_ft.jpg")
+    // const materialP = new THREE.MeshBasicMaterial(
+    //   { color: 0xffffff, side: THREE.DoubleSide, map: texture1 });
+    let material4;
+    let materialArray4 = []
+    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0xffff00 }))
+    materialArray4.push(new THREE.MeshBasicMaterial({ map: texturebk }))
+    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0xefff00 }))
+    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0xcfff00 }))
+    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0xddff00 }))
+    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0xfbbff0 }))
 
-const cPointLabel=new CSS2DObject(pContainer)
-cPointLabel.position.set(200,3,0)
 
-scene.add(cPointLabel)
 
-const mousePos=new THREE.Vector2()
-const raycaster=new THREE.Raycaster()
-// window.addEventListener('')m 6.57
+    for (let i=1;i<6;i++){
+      let geometry5 = new THREE.BoxGeometry(10, 100, 250)
+      let material5
+      if(i%2==0)
+      {material5 = new THREE.MeshBasicMaterial({ color: 0x563400 });}
+      else{material5 = materialArray4}
+      const cube4 = new THREE.Mesh(geometry5, material5);
+      cube4.position.x = Math.cos(10+i*10) * 500;
+      cube4.position.z = Math.sin(10+i*10) * 500;
+      cube4.rotation.y = Math.sin(6*i+3.14);
+      
+      // cube4.position.x = -500+i*10*3,14//3000;
+      // cube4.position.z = 150*i//3000;
 
-const carP=document.createElement('p')
 
-const carLabel=new CSS2DObject(carP)
-carLabel.position.set(200,3,0)
-cube2.add(carLabel)
+      scene.add(cube4)
+      console.log("add cube nr xz ",cube4.position.x,cube4.position.z)
+    }
+    
+    
+   
+
+
+// const p=document.createElement('p')
+// p.className="tooltip"
+// p.textContent="dsfdsfdsfs"
+// const pContainer=document.createElement("div")
+// pContainer.appendChild(p)
+
+// const cPointLabel=new CSS2DObject(pContainer)
+// cPointLabel.position.set(200,3,0)
+
+// scene.add(cPointLabel)
+
+// const mousePos=new THREE.Vector2()
+// const raycaster=new THREE.Raycaster()
+// // window.addEventListener('')m 6.57
+
+// const carP=document.createElement('p')
+
+// const carLabel=new CSS2DObject(carP)
+// carLabel.position.set(200,3,0)
+// cube2.add(carLabel)
 
 
 
@@ -135,10 +185,10 @@ cube2.add(carLabel)
 
     function animate() {
       requestAnimationFrame(animate);
-
+      controls.update()
       // cube.rotation.x += 0.01;
       // cube.rotation.y += 0.01;
-
+     
       renderer.render(scene, camera);
     }
 

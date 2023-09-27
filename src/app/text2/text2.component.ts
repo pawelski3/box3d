@@ -100,7 +100,7 @@ console.log("positopn ",textMesh.position.x)
       renderer.render(scene, camera);
     }
 
-    animate();
+   animate();
 
 
 
