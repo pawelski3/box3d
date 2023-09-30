@@ -94,13 +94,13 @@ export class Text2Component implements OnInit {
 if (textMesh.position.x >9){
   textMesh.position.x = -7;
 }
-      textMesh.position.x += 0.01;
+      //textMesh.position.x += 0.01;
       // textMesh.rotation.y += 0.01;
 console.log("positopn ",textMesh.position.x)
       renderer.render(scene, camera);
     }
 
-   animate();
+  animate();
 
 
 

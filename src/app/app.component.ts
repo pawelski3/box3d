@@ -61,12 +61,12 @@ cameraz:any
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
     let materialArray = []
-    let textureft = new THREE.TextureLoader().load("../assets/barren_ft.jpg")
-    let texturebk = new THREE.TextureLoader().load("../assets/barren_bk.jpg")
-    let textureup = new THREE.TextureLoader().load("../assets/barren_up.jpg")
-    let texturedn = new THREE.TextureLoader().load("../assets/barren_dn.jpg")
-    let texturert = new THREE.TextureLoader().load("../assets/barren_rt.jpg")
-    let texturelt = new THREE.TextureLoader().load("../assets/barren_lf.jpg")
+    let textureft = new THREE.TextureLoader().load("../assets/gallery/barren_ft.jpg")
+    let texturebk = new THREE.TextureLoader().load("../assets/gallery/barren_bk.jpg")
+    let textureup = new THREE.TextureLoader().load("../assets/gallery/barren_up.jpg")
+    let texturedn = new THREE.TextureLoader().load("../assets/gallery/barren_dn.jpg")
+    let texturert = new THREE.TextureLoader().load("../assets/gallery/barren_rt.jpg")
+    let texturelt = new THREE.TextureLoader().load("../assets/gallery/barren_lf.jpg")
 
     materialArray.push(new THREE.MeshBasicMaterial({ map: textureft }))
     materialArray.push(new THREE.MeshBasicMaterial({ map: texturebk }))
@@ -81,7 +81,10 @@ cameraz:any
     let skyboxgeo = new THREE.BoxGeometry(10000, 10000, 10000)
     let skybox = new THREE.Mesh(skyboxgeo, material)
     // scene.add(skybox)
-
+    // var textureLoader = new THREE.TextureLoader();
+    // var texture = textureLoader.load('./3d/xxx.png');
+    // texture.encoding = THREE.sRGBEncoding;
+    // scene.background = texture----------------------------------
 
 
     // const cube = new THREE.Mesh( geometry, material );
@@ -101,41 +104,110 @@ cameraz:any
     // cube3.position.x = -500//3000;
     // cube3.position.z = -150//3000;
     // scene.add(cube3)
-    let texture1= new THREE.TextureLoader().load("../assets/barren_ft.jpg")
+    let texture1= new THREE.TextureLoader().load("../assets/gallery/barren_ft.jpg")
     // const materialP = new THREE.MeshBasicMaterial(
     //   { color: 0xffffff, side: THREE.DoubleSide, map: texture1 });
     let material4;
     let materialArray4 = []
-    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0xffff00 }))
     materialArray4.push(new THREE.MeshBasicMaterial({ map: texturebk }))
-    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0xefff00 }))
-    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0xcfff00 }))
-    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0xddff00 }))
-    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0xfbbff0 }))
+    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0x563400}))//map: texturebk }))
+    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0x563400 }))
+    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0x563400 }))
+    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0x563400 }))
+    materialArray4.push(new THREE.MeshBasicMaterial({ color: 0x563400 }))
+
+    let texture6= new THREE.TextureLoader().load("../assets/gallery/foto5.jpg")
+    let materialArray6 = []
+    materialArray6.push(new THREE.MeshBasicMaterial({ map: texture6 }))
+    materialArray6.push(new THREE.MeshBasicMaterial({ color: 0x563400}))//map: texturebk }))
+    materialArray6.push(new THREE.MeshBasicMaterial({ color: 0x563400 }))
+    materialArray6.push(new THREE.MeshBasicMaterial({ color: 0x563400 }))
+    materialArray6.push(new THREE.MeshBasicMaterial({ color: 0x563400 }))
+    materialArray6.push(new THREE.MeshBasicMaterial({ color: 0x563400 }))
 
 
 
-    for (let i=1;i<6;i++){
-      let geometry5 = new THREE.BoxGeometry(10, 100, 250)
-      let material5
-      if(i%2==0)
-      {material5 = new THREE.MeshBasicMaterial({ color: 0x563400 });}
-      else{material5 = materialArray4}
-      const cube4 = new THREE.Mesh(geometry5, material5);
-      cube4.position.x = Math.cos(10+i*10) * 500;
-      cube4.position.z = Math.sin(10+i*10) * 500;
-      cube4.rotation.y = Math.sin(6*i+3.14);
+    console.log("matarr4, ",materialArray4)
+
+
+
+    // for (let i=1;i<6;i++){
+    //   let geometry5 = new THREE.BoxGeometry(10, 100, 250)
+    //   let material5
+    //   if(i%2==0)
+    //   {material5 = new THREE.MeshBasicMaterial({ color: 0x563400 });}
+    //   else{material5 = materialArray4}
+    //   const cube4 = new THREE.Mesh(geometry5, material5);
+    //   cube4.position.x = Math.cos(10+i*10) * 500;
+    //   cube4.position.z = Math.sin(10+i*10) * 500;
+    //   cube4.rotation.y = Math.PI/2+500/i  //Math.sin(6*i+3.14);
       
-      // cube4.position.x = -500+i*10*3,14//3000;
-      // cube4.position.z = 150*i//3000;
+    
+    //   // Obrót sześcianu, aby ta sama ściana była na zewnątrz
+    //   // cube.rotation.y = angle;
 
 
-      scene.add(cube4)
-      console.log("add cube nr xz ",cube4.position.x,cube4.position.z)
+
+
+    //   // cube4.position.x = -500+i*10*3,14//3000;
+    //   // cube4.position.z = 150*i//3000;
+
+
+    //   scene.add(cube4)
+    //   console.log("add cube nr xz ",cube4.position.x,cube4.position.z)
+    // }
+    
+    let materialArray5=[]
+    const numCubes = 8; // Liczba sześcianów
+    const cubes = [];
+    let textureFoto= new THREE.TextureLoader().load("../assets/gallery/foto1.JPG")
+    let textureFoto2= new THREE.TextureLoader().load("../assets/gallery/foto2.JPG")
+    for (let i = 0; i < numCubes; i++) {
+        // const geometry = new THREE.BoxGeometry(1, 1, 1);
+        let geometry5 = new THREE.BoxGeometry(10, 240, 350)
+        let material5
+        if (i==2)  //(i%2==0)
+        {
+         
+          materialArray5[0]=new THREE.MeshBasicMaterial({ map: textureFoto2 })
+          material5 = materialArray5}
+        
+        else{
+          materialArray4[0]=new THREE.MeshBasicMaterial({ map: textureFoto })
+          material5 = materialArray4
+         
+        }
+        if (i==4)  //(i%2==0)
+        {
+         
+          //materialArray5[0]=new THREE.MeshBasicMaterial({ map: textureFoto2 })
+          material5 = materialArray6}
+        // material5 = materialArray4
+        const cube4 = new THREE.Mesh(geometry5, material5);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        // const cube = new THREE.Mesh(geometry, material);
+        
+        // Ustawienie pozycji sześcianu na okręgu
+        const angle = (i / numCubes) * Math.PI * 2;
+        const radius = 500; // Promień okręgu
+        cube4.position.x = Math.cos(angle) * radius;
+        cube4.position.z = Math.sin(angle) * radius;
+    
+        // Obrót sześcianu, aby ta sama ściana była na zewnątrz
+        cube4.rotation.y = -angle;
+    
+        scene.add(cube4);
+        // cubes.push(cube);
     }
+
+
     
+
+
+
+
+
     
-   
 
 
 // const p=document.createElement('p')
@@ -192,7 +264,7 @@ cameraz:any
       renderer.render(scene, camera);
     }
 
-    animate();
+    //animate();
 
 
 
